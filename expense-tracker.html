@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT114 Expense Tracker | Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --first-color: hsl(174, 63%, 48%);
+            --first-color-alt: hsl(174, 63%, 42%);
+            --title-color: hsl(174, 12%, 15%);
+            --text-color: hsl(174, 12%, 40%);
+            --text-light: hsl(174, 8%, 65%);
+            --body-color: hsl(174, 60%, 98%);
+            --card-color: #fff;
+            --border-color: hsl(174, 20%, 88%);
+            --shadow: 0 4px 24px hsla(174, 40%, 15%, 0.10);
+            --shadow-hover: 0 8px 32px hsla(174, 40%, 15%, 0.20);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .gallery-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--card-color);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            padding: 0 1.5rem;
+            height: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .gallery-nav__back {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--first-color);
+            font-weight: 500;
+            font-size: 0.938rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .gallery-nav__back:hover { color: var(--first-color-alt); }
+
+        .gallery-nav__title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--title-color);
+        }
+
+        .gallery-nav__github {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--first-color);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 0.5rem 1.1rem;
+            border-radius: 2rem;
+            transition: background 0.2s, transform 0.2s;
+            white-space: nowrap;
+        }
+        .gallery-nav__github:hover {
+            background: var(--first-color-alt);
+            transform: translateY(-1px);
+        }
+
+        .gallery-header {
+            text-align: center;
+            padding: 3rem 1.5rem 2rem;
+        }
+        .gallery-header__subtitle {
+            font-size: 0.813rem;
+            color: var(--first-color);
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .gallery-header__title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--title-color);
+        }
+        .gallery-header__count {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .gallery-item {
+            background: var(--card-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        .gallery-item__thumb {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s;
+        }
+        .gallery-item:hover .gallery-item__thumb { transform: scale(1.04); }
+
+        .gallery-item__label {
+            padding: 0.6rem 0.9rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: rgba(0, 0, 0, 0.90);
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+        .lightbox.active { display: flex; }
+
+        .lightbox__img {
+            max-width: 100%;
+            max-height: 88vh;
+            border-radius: 0.75rem;
+            box-shadow: 0 8px 48px rgba(0, 0, 0, 0.6);
+            object-fit: contain;
+        }
+
+        .lightbox__close {
+            position: fixed;
+            top: 1rem;
+            right: 1.25rem;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.85;
+            background: none;
+            border: none;
+            line-height: 1;
+            transition: opacity 0.2s;
+        }
+        .lightbox__close:hover { opacity: 1; }
+
+        .lightbox__btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 1.6rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.14);
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+        .lightbox__btn:hover { background: rgba(255, 255, 255, 0.28); }
+        .lightbox__btn--prev { left: 1rem; }
+        .lightbox__btn--next { right: 1rem; }
+
+        .lightbox__counter {
+            position: fixed;
+            bottom: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.875rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .gallery-header__title { font-size: 1.5rem; }
+            .gallery-nav__title { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="gallery-nav">
+        <a href="index.html" class="gallery-nav__back">
+            <i class="ri-arrow-left-line"></i> Portfolio
+        </a>
+        <span class="gallery-nav__title">IT114 Expense Tracker</span>
+        <a href="https://github.com/jienie37/IT114-Expense-Tracker" target="_blank" rel="noopener noreferrer" class="gallery-nav__github">
+            <i class="ri-github-line"></i> GitHub
+        </a>
+    </nav>
+
+    <header class="gallery-header">
+        <p class="gallery-header__subtitle">Web Development</p>
+        <h1 class="gallery-header__title">IT114 Expense Tracker</h1>
+        <p class="gallery-header__count">5 screenshots &nbsp;·&nbsp; Click any image to enlarge</p>
+    </header>
+
+    <div class="gallery-grid">
+        <div class="gallery-item" onclick="openLightbox(0)">
+            <img class="gallery-item__thumb" src="assets/img/projects/expense-tracker/image_2026-03-18_20-10-07.png" alt="IT114 Expense Tracker screenshot 1">
+            <p class="gallery-item__label">Screenshot 1</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(1)">
+            <img class="gallery-item__thumb" src="assets/img/projects/expense-tracker/image_2026-03-18_20-10-08.png" alt="IT114 Expense Tracker screenshot 2">
+            <p class="gallery-item__label">Screenshot 2</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(2)">
+            <img class="gallery-item__thumb" src="assets/img/projects/expense-tracker/image_2026-03-18_20-10-08%20(2).png" alt="IT114 Expense Tracker screenshot 3">
+            <p class="gallery-item__label">Screenshot 3</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(3)">
+            <img class="gallery-item__thumb" src="assets/img/projects/expense-tracker/image_2026-03-18_20-10-08%20(3).png" alt="IT114 Expense Tracker screenshot 4">
+            <p class="gallery-item__label">Screenshot 4</p>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(4)">
+            <img class="gallery-item__thumb" src="assets/img/projects/expense-tracker/image_2026-03-18_20-10-08%20(4).png" alt="IT114 Expense Tracker screenshot 5">
+            <p class="gallery-item__label">Screenshot 5</p>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" onclick="handleOverlayClick(event)">
+        <button class="lightbox__close" onclick="closeLightbox()" aria-label="Close"><i class="ri-close-line"></i></button>
+        <button class="lightbox__btn lightbox__btn--prev" onclick="navigate(event, -1)" aria-label="Previous"><i class="ri-arrow-left-s-line"></i></button>
+        <img class="lightbox__img" id="lightbox-img" src="" alt="">
+        <button class="lightbox__btn lightbox__btn--next" onclick="navigate(event, 1)" aria-label="Next"><i class="ri-arrow-right-s-line"></i></button>
+        <span class="lightbox__counter" id="lightbox-counter"></span>
+    </div>
+
+    <script>
+        const images = [...document.querySelectorAll('.gallery-item img')].map(img => ({ src: img.src, alt: img.alt }));
+        let current = 0;
+
+        function openLightbox(idx) {
+            current = idx;
+            render();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function render() {
+            document.getElementById('lightbox-img').src = images[current].src;
+            document.getElementById('lightbox-img').alt = images[current].alt;
+            document.getElementById('lightbox-counter').textContent = (current + 1) + ' / ' + images.length;
+        }
+
+        function navigate(e, dir) {
+            e.stopPropagation();
+            current = (current + dir + images.length) % images.length;
+            render();
+        }
+
+        function handleOverlayClick(e) {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        }
+
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') { current = (current - 1 + images.length) % images.length; render(); }
+            if (e.key === 'ArrowRight') { current = (current + 1) % images.length; render(); }
+        });
+    </script>
+</body>
+</html>

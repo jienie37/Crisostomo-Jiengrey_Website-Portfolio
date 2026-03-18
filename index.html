@@ -1,229 +1,366 @@
 <!DOCTYPE html>
-<html lang ="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" initial-scales="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Jiengrey Crisostomo — IT Student">
 
-    <!--REMIX ICONS-->
-    <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
-    rel="stylesheet"
-    />
+    <!-- REMIX ICONS -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet">
 
-    <!--CSS-->
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/styles.css">
 
-    <title>My own portfolio</title>
+    <title>Jiengrey Crisostomo | Portfolio</title>
 </head>
 <body>
-    <!--HEADER PROFILE-->
-    <header class="profile container">
-        <i class="ri-moon-line change-theme" id="theme-button"></i>
 
+    <!-- PARTICLES BACKGROUND -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar__container container">
+            <a href="#home" class="navbar__logo">JC</a>
+            <ul class="navbar__links" id="navbar-links">
+                <li><a href="#home" class="navbar__link active-link">Home</a></li>
+                <li><a href="#portfolio" class="navbar__link">Portfolio</a></li>
+                <li><a href="#contact" class="navbar__link">Contact</a></li>
+            </ul>
+            <div class="navbar__actions">
+                <i class="ri-moon-line change-theme" id="theme-button" aria-label="Toggle dark mode"></i>
+                <button class="navbar__toggle" id="navbar-toggle" aria-label="Toggle menu">
+                    <i class="ri-menu-3-line"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER / HERO -->
+    <header class="profile container" id="home">
         <div class="profile__container grid">
             <div class="profile__data">
                 <div class="profile__border">
                     <div class="profile__perfil">
-                        <!--INSERT LOGO PICTURE-->
-                        <img src="assets/img/81961695_1933634883448809_4077705559288053760_n.jpg" alt="logo">
-
+                        <img src="assets/img/download.jfif" alt="Jiengrey Crisostomo profile photo">
                     </div>
                 </div>
                 <h2 class="profile__name">Jiengrey Crisostomo</h2>
-                <h3 class="profile__profession">IT Student</h3>
+                <h3 class="profile__profession">
+                    <span class="typing-text" id="typing-text"></span><span class="typing-cursor">|</span>
+                </h3>
 
                 <ul class="profile__social">
-                    <a href="https://www.facebook.com/jiengrey.crisostomo.5/" target= "_blank" class="profile__social-link">
-                        <i class="ri-facebook-circle-fill"></i>
-                    </a>
-                    <a href="https://github.com/jienie37" target= "_blank" class="profile__social-link">
-                        <i class="ri-github-fill"></i>
-                    </a>
-                    <a href="https://www.twitch.tv" target= "_blank" class="profile__social-link">
-                        <i class="ri-twitch-fill"></i>
-                    </a>
-
+                    <li>
+                        <a href="https://www.facebook.com/jiengrey.crisostomo.5/" target="_blank" rel="noopener noreferrer" class="profile__social-link" aria-label="Facebook">
+                            <i class="ri-facebook-circle-fill"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/jienie37" target="_blank" rel="noopener noreferrer" class="profile__social-link" aria-label="GitHub">
+                            <i class="ri-github-fill"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.twitch.tv" target="_blank" rel="noopener noreferrer" class="profile__social-link" aria-label="Twitch">
+                            <i class="ri-twitch-fill"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            
+
             <div class="profile__info grid">
-                <div class="profile__info-group">
-                    <h3 class="profile__info-number">2</h3>
-                    <p class="profile__info-description">Years of being a<br> student</p>
+                <div class="profile__info-group" data-count="2" data-suffix="">
+                    <h3 class="profile__info-number counter-number">0</h3>
+                    <p class="profile__info-description">Years of being a<br>student</p>
                 </div>
-                <div class="profile__info-group">
-                    <h3 class="profile__info-number">+10</h3>
-                    <p class="profile__info-description">Completed <br> projects</p>
+                <div class="profile__info-group" data-count="10" data-suffix="+">
+                    <h3 class="profile__info-number counter-number">0</h3>
+                    <p class="profile__info-description">Completed<br>projects</p>
                 </div>
-                <div class="profile__info-group">
-                    <h3 class="profile__info-number">+1000</h3>
-                    <p class="profile__info-description">Days of <br> pain</p>
+                <div class="profile__info-group" data-count="1000" data-suffix="+">
+                    <h3 class="profile__info-number counter-number">0</h3>
+                    <p class="profile__info-description">Days of<br>pain</p>
                 </div>
             </div>
-        </div>  
+
+            <div class="profile__buttons">
+                <a href="#contact" class="button button--primary">
+                    <i class="ri-mail-send-line"></i> Hire Me
+                </a>
+                <a href="#portfolio" class="button button--outline">
+                    <i class="ri-eye-line"></i> View Work
+                </a>
+            </div>
+        </div>
     </header>
 
-    <!--MAIN-->
+    <!-- MAIN -->
     <main class="main">
-        <section class="filters container">
-            <!--FILTER TAB-->
-            <ul class="filters__content">
-                <button class="filters__button filter-tab-active" data-target="#projects">
-                    <strong>Projects</strong>
-                </button>
 
-                <button class="filters__button" data-target="#skills">
-                    <strong>Skills</strong>
+        <!-- PORTFOLIO SECTION (Projects + Skills) -->
+        <section class="filters container" id="portfolio">
+            <h2 class="section__title">My Portfolio</h2>
+            <p class="section__subtitle">Projects &amp; Skills</p>
+
+            <!-- FILTER TABS -->
+            <div class="filters__content">
+                <button class="filters__button filter-tab-active" data-target="#projects-tab">
+                    <i class="ri-folder-2-line"></i> Projects
                 </button>
-            </ul>
+                <button class="filters__button" data-target="#skills-tab">
+                    <i class="ri-tools-line"></i> Skills
+                </button>
+            </div>
+
             <div class="filters__sections">
-                <!--PROJECTS-->
-                <div class="projects__content grid filters__active" data-content id="projects">
-                    <article class="projects__card">
-                        <img src="assets/img/download.jfif" alt="" class="projects__img">
-
+                <!-- PROJECTS TAB -->
+                <div class="projects__content grid filters__active" data-content id="projects-tab">
+                    <article class="projects__card" tabindex="0">
+                        <img src="assets/img/projects/it155mp/image_2026-03-18_20-12-52.png" alt="IT155MP project thumbnail" class="projects__img" loading="lazy">
                         <div class="projects__modal">
                             <div>
-                                <span class="projects__subtitle">Sample</span>
-                                <h3 class="projects__title">Project</h3>
-                                <a href="https://github.com/jienie37/IT114LM1W1-Introduction-to-HTML-and-CSS" class="projects__button button button__small">
-                                    <i class="ri-link"></i>
-                                </a>
+                                <span class="projects__subtitle">Web Development</span>
+                                <h3 class="projects__title">IT155MP</h3>
+                                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem;">
+                                    <a href="it155mp.html" class="projects__button" aria-label="View IT155MP gallery">
+                                        <i class="ri-gallery-line"></i> Gallery
+                                    </a>
+                                    <a href="https://github.com/jienie37/IT155MP" target="_blank" rel="noopener noreferrer" class="projects__button" style="background:transparent;border:1.5px solid rgba(255,255,255,0.5);" aria-label="View IT155MP on GitHub">
+                                        <i class="ri-github-line"></i> GitHub
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="projects__card">
-                        <img src="assets/img/galaxy4.jpg" alt="" class="projects__img">
-
+                    <article class="projects__card" tabindex="0">
+                        <img src="assets/img/projects/juresto/image_2026-03-18_19-56-15.png" alt="Juresto project thumbnail" class="projects__img" loading="lazy">
                         <div class="projects__modal">
                             <div>
-                                <span class="projects__subtitle">Sample</span>
-                                <h3 class="projects__title">Project</h3>
-                                <a href="https://github.com/jienie37/IT114LM1W2-Intermediate-CSS" class="projects__button button button__small">
-                                    <i class="ri-link"></i>
-                                </a>
+                                <span class="projects__subtitle">Web Development</span>
+                                <h3 class="projects__title">Juresto</h3>
+                                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem;">
+                                    <a href="juresto.html" class="projects__button" aria-label="View Juresto gallery">
+                                        <i class="ri-gallery-line"></i> Gallery
+                                    </a>
+                                    <a href="https://github.com/jienie37/Juresto/tree/web" target="_blank" rel="noopener noreferrer" class="projects__button" style="background:transparent;border:1.5px solid rgba(255,255,255,0.5);" aria-label="View Juresto on GitHub">
+                                        <i class="ri-github-line"></i> GitHub
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="projects__card">
-                        <img src="assets/img/galaxy2.jpg" alt="" class="projects__img">
-
+                    <article class="projects__card" tabindex="0">
+                        <img src="assets/img/projects/twtclone/image_2026-03-18_20-14-15.png" alt="Twitter Clone Main Page project thumbnail" class="projects__img" loading="lazy">
                         <div class="projects__modal">
                             <div>
-                                <span class="projects__subtitle">Sample</span>
-                                <h3 class="projects__title">Project</h3>
-                                <a href="https://github.com/jienie37/IT114LM1W3-Introduction-to-JavaScript" class="projects__button button button__small">
-                                    <i class="ri-link"></i>
-                                </a>
+                                <span class="projects__subtitle">Web Development</span>
+                                <h3 class="projects__title">Twitter Clone Main Page</h3>
+                                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem;">
+                                    <a href="twtclone.html" class="projects__button" aria-label="View Twitter Clone gallery">
+                                        <i class="ri-gallery-line"></i> Gallery
+                                    </a>
+                                    <a href="https://github.com/jienie37/twtclone_mainpage" target="_blank" rel="noopener noreferrer" class="projects__button" style="background:transparent;border:1.5px solid rgba(255,255,255,0.5);" aria-label="View Twitter Clone on GitHub">
+                                        <i class="ri-github-line"></i> GitHub
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </article>
 
-                    <article class="projects__card">
-                        <img src="assets/img/galaxy3.jpg" alt="" class="projects__img">
-
+                    <article class="projects__card" tabindex="0">
+                        <img src="assets/img/projects/expense-tracker/image_2026-03-18_20-10-07.png" alt="IT114 Expense Tracker project thumbnail" class="projects__img" loading="lazy">
                         <div class="projects__modal">
                             <div>
-                                <span class="projects__subtitle">Sample</span>
-                                <h3 class="projects__title">Project</h3>
-                                <a href="#" class="projects__button button button__small">
-                                    <i class="ri-link"></i>
-                                </a>
+                                <span class="projects__subtitle">Web Development</span>
+                                <h3 class="projects__title">IT114 Expense Tracker</h3>
+                                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem;">
+                                    <a href="expense-tracker.html" class="projects__button" aria-label="View IT114 Expense Tracker gallery">
+                                        <i class="ri-gallery-line"></i> Gallery
+                                    </a>
+                                    <a href="https://github.com/jienie37/IT114-Expense-Tracker" target="_blank" rel="noopener noreferrer" class="projects__button" style="background:transparent;border:1.5px solid rgba(255,255,255,0.5);" aria-label="View IT114 Expense Tracker on GitHub">
+                                        <i class="ri-github-line"></i> GitHub
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </article>
 
-                    
-
+                    <article class="projects__card" tabindex="0">
+                        <img src="assets/img/projects/serve+/image_2026-03-18_20-54-56.png" alt="Serve+ project thumbnail" class="projects__img" loading="lazy">
+                        <div class="projects__modal">
+                            <div>
+                                <span class="projects__subtitle">Web Development</span>
+                                <h3 class="projects__title">Serve+</h3>
+                                <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem;">
+                                    <a href="serve-plus.html" class="projects__button" aria-label="View Serve+ gallery">
+                                        <i class="ri-gallery-line"></i> Gallery
+                                    </a>
+                                    <a href="https://github.com/shwagg/serve_plus#" target="_blank" rel="noopener noreferrer" class="projects__button" style="background:transparent;border:1.5px solid rgba(255,255,255,0.5);" aria-label="View Serve+ on GitHub">
+                                        <i class="ri-github-line"></i> GitHub
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
                 </div>
 
-                <!--SKILLS-->
-                <div class="skills__content grid" data-content id="skills">
+                <!-- SKILLS TAB -->
+                <div class="skills__content grid" data-content id="skills-tab">
                     <div class="skills__area">
-                        <h3 class="skills__title">
-                            General Developer
-                        </h3>
+                        <h3 class="skills__title">General Developer</h3>
 
-                        <div class="skills__box">
-                            <div class="skills__group">
-                                <div class="skills__data">
-                                    <i class="ri-checkbox-circle-line"></i>
-
-                                    <div>
-                                        <h3 class="skills__name">HTML</h3>
-                                        <span class="skills__level">Basic</span>
+                        <div class="skills__list">
+                            <div class="skills__item">
+                                <div class="skills__item-header">
+                                    <div class="skills__item-left">
+                                        <i class="ri-html5-line"></i>
+                                        <span class="skills__name">HTML</span>
                                     </div>
+                                    <span class="skills__percent">60%</span>
                                 </div>
-
-                                <div class="skills__data">
-                                    <i class="ri-checkbox-circle-line"></i>
-
-                                    <div>
-                                        <h3 class="skills__name">CSS</h3>
-                                        <span class="skills__level">Basic</span>
-                                    </div>
-                                </div>
-
-                                <div class="skills__data">
-                                    <i class="ri-checkbox-circle-line"></i>
-
-                                    <div>
-                                        <h3 class="skills__name">Javascript</h3>
-                                        <span class="skills__level">Basic</span>
-                                    </div>
+                                <div class="skills__bar-track">
+                                    <div class="skills__bar-fill" data-width="60"></div>
                                 </div>
                             </div>
 
-                            <div class="skills__group">
-                                <div class="skills__data">
-                                    <i class="ri-checkbox-circle-line"></i>
-
-                                    <div>
-                                        <h3 class="skills__name">C#</h3>
-                                        <span class="skills__level">Basic</span>
+                            <div class="skills__item">
+                                <div class="skills__item-header">
+                                    <div class="skills__item-left">
+                                        <i class="ri-css3-line"></i>
+                                        <span class="skills__name">CSS</span>
                                     </div>
+                                    <span class="skills__percent">55%</span>
                                 </div>
-
-                                <div class="skills__data">
-                                    <i class="ri-checkbox-circle-line"></i>
-
-                                    <div>
-                                        <h3 class="skills__name">C++</h3>
-                                        <span class="skills__level">Basic</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="skills__data">
-                                    <i class="ri-checkbox-circle-line"></i>
-
-                                    <div>
-                                        <h3 class="skills__name">Python</h3>
-                                        <span class="skills__level">Basic</span>
-                                    </div>
+                                <div class="skills__bar-track">
+                                    <div class="skills__bar-fill" data-width="55"></div>
                                 </div>
                             </div>
 
+                            <div class="skills__item">
+                                <div class="skills__item-header">
+                                    <div class="skills__item-left">
+                                        <i class="ri-javascript-line"></i>
+                                        <span class="skills__name">JavaScript</span>
+                                    </div>
+                                    <span class="skills__percent">50%</span>
+                                </div>
+                                <div class="skills__bar-track">
+                                    <div class="skills__bar-fill" data-width="50"></div>
+                                </div>
+                            </div>
+
+                            <div class="skills__item">
+                                <div class="skills__item-header">
+                                    <div class="skills__item-left">
+                                        <i class="ri-code-s-slash-line"></i>
+                                        <span class="skills__name">C#</span>
+                                    </div>
+                                    <span class="skills__percent">40%</span>
+                                </div>
+                                <div class="skills__bar-track">
+                                    <div class="skills__bar-fill" data-width="40"></div>
+                                </div>
+                            </div>
+
+                            <div class="skills__item">
+                                <div class="skills__item-header">
+                                    <div class="skills__item-left">
+                                        <i class="ri-terminal-box-line"></i>
+                                        <span class="skills__name">C++</span>
+                                    </div>
+                                    <span class="skills__percent">35%</span>
+                                </div>
+                                <div class="skills__bar-track">
+                                    <div class="skills__bar-fill" data-width="35"></div>
+                                </div>
+                            </div>
+
+                            <div class="skills__item">
+                                <div class="skills__item-header">
+                                    <div class="skills__item-left">
+                                        <i class="ri-bug-line"></i>
+                                        <span class="skills__name">Python</span>
+                                    </div>
+                                    <span class="skills__percent">45%</span>
+                                </div>
+                                <div class="skills__bar-track">
+                                    <div class="skills__bar-fill" data-width="45"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
+        <!-- CONTACT SECTION -->
+        <section class="contact container" id="contact">
+            <h2 class="section__title">Get In Touch</h2>
+            <p class="section__subtitle">Contact Me</p>
+
+            <div class="contact__container grid">
+                <div class="contact__info">
+                    <div class="contact__card">
+                        <i class="ri-mail-line contact__card-icon"></i>
+                        <h3 class="contact__card-title">Email</h3>
+                        <p class="contact__card-data">jiengreycrisostomo@gmail.com</p>
+                    </div>
+                    <div class="contact__card">
+                        <i class="ri-github-line contact__card-icon"></i>
+                        <h3 class="contact__card-title">GitHub</h3>
+                        <p class="contact__card-data">github.com/jienie37</p>
+                    </div>
+                    <div class="contact__card">
+                        <i class="ri-map-pin-line contact__card-icon"></i>
+                        <h3 class="contact__card-title">Location</h3>
+                        <p class="contact__card-data">Philippines</p>
+                    </div>
+                </div>
+
+                <form class="contact__form" id="contact-form" novalidate>
+                    <div class="contact__form-group">
+                        <label for="contact-name" class="contact__form-label">Full Name</label>
+                        <input type="text" id="contact-name" name="name" class="contact__form-input" placeholder="Your name" required autocomplete="name">
+                        <span class="contact__form-error" id="name-error"></span>
+                    </div>
+                    <div class="contact__form-group">
+                        <label for="contact-email" class="contact__form-label">Email Address</label>
+                        <input type="email" id="contact-email" name="email" class="contact__form-input" placeholder="your@email.com" required autocomplete="email">
+                        <span class="contact__form-error" id="email-error"></span>
+                    </div>
+                    <div class="contact__form-group">
+                        <label for="contact-message" class="contact__form-label">Message</label>
+                        <textarea id="contact-message" name="message" class="contact__form-input contact__form-textarea" placeholder="Write your message..." required rows="5"></textarea>
+                        <span class="contact__form-error" id="message-error"></span>
+                    </div>
+                    <button type="submit" class="button button--primary contact__form-submit" id="contact-submit">
+                        <i class="ri-send-plane-line"></i> Send Message
+                    </button>
+                    <p class="contact__form-success" id="form-success">Message sent successfully!</p>
+                </form>
             </div>
         </section>
 
     </main>
 
-    <!--JAVASCRIPT-->
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p class="footer__copy">&copy; 2026 Jiengrey Crisostomo. All rights reserved.</p>
+        <a href="#home" class="footer__scroll-top" aria-label="Scroll to top">
+            <i class="ri-arrow-up-line"></i>
+        </a>
+    </footer>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button class="scroll-top" id="scroll-top" aria-label="Scroll to top">
+        <i class="ri-arrow-up-line"></i>
+    </button>
+
+    <!-- JAVASCRIPT -->
     <script src="assets/scrollreveal.min.js"></script>
-
-
     <script src="assets/main.js"></script>
-
 </body>
-
-
-
-
-
 </html>

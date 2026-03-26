@@ -402,8 +402,49 @@
     sr.reveal('.section__title',       { delay: 200 });
     sr.reveal('.section__subtitle',    { delay: 300 });
     sr.reveal('.filters__content',     { delay: 350 });
-    sr.reveal('.projects__card',       { interval: 100, delay: 300 });
     sr.reveal('.skills__area',         { delay: 300 });
     sr.reveal('.contact__card',        { interval: 120, delay: 300 });
     sr.reveal('.contact__form',        { origin: 'right', delay: 400 });
+})();
+
+
+/* =============================================
+   PORTFOLIO LOADER — edit assets/data/projects.json to add/remove projects
+   ============================================= */
+(function initPortfolio() {
+    const container = document.getElementById('projects-tab');
+    if (!container) return;
+
+    fetch('assets/data/projects.json')
+        .then(res => res.json())
+        .then(projects => {
+            projects.forEach(p => {
+                const card = document.createElement('article');
+                card.className = 'projects__card';
+                card.tabIndex = 0;
+                card.innerHTML =
+                    '<img src="' + p.image + '" alt="' + p.title + ' project thumbnail" class="projects__img" loading="lazy">' +
+                    '<div class="projects__modal"><div>' +
+                        '<span class="projects__subtitle">' + p.subtitle + '</span>' +
+                        '<h3 class="projects__title">' + p.title + '</h3>' +
+                        '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.25rem;">' +
+                            '<a href="' + p.gallery + '" class="projects__button" aria-label="View ' + p.title + ' gallery">' +
+                                '<i class="ri-gallery-line"></i> Gallery' +
+                            '</a>' +
+                            '<a href="' + p.github + '" target="_blank" rel="noopener noreferrer" class="projects__button" style="background:transparent;border:1.5px solid rgba(255,255,255,0.5);" aria-label="View ' + p.title + ' on GitHub">' +
+                                '<i class="ri-github-line"></i> GitHub' +
+                            '</a>' +
+                        '</div>' +
+                    '</div></div>';
+                container.appendChild(card);
+            });
+
+            // Re-run ScrollReveal on dynamically added cards
+            if (typeof ScrollReveal !== 'undefined') {
+                ScrollReveal().reveal('.projects__card', { interval: 100, delay: 300 });
+            }
+        })
+        .catch(() => {
+            container.innerHTML = '<p style="color:var(--text-color-light)">Could not load projects.</p>';
+        });
 })();

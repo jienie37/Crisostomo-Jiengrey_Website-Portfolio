@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Fan Frenzy",
+    "subtitle": "Web Development",
+    "image": "assets/img/projects/it155mp/image_2026-03-18_20-12-52.png",
+    "gallery": "it155mp.html",
+    "github": "https://github.com/jienie37/IT155MP"
+  },
+  {
+    "title": "Juresto",
+    "subtitle": "Web Development",
+    "image": "assets/img/projects/juresto/image_2026-03-18_19-56-15.png",
+    "gallery": "juresto.html",
+    "github": "https://github.com/jienie37/Juresto/tree/web"
+  },
+  {
+    "title": "Twitter Clone",
+    "subtitle": "Web Development",
+    "image": "assets/img/projects/twtclone/image_2026-03-18_20-14-15.png",
+    "gallery": "twtclone.html",
+    "github": "https://github.com/jienie37/twtclone_mainpage"
+  },
+  {
+    "title": "Expense Tracker",
+    "subtitle": "Web Development",
+    "image": "assets/img/projects/expense-tracker/image_2026-03-18_20-10-07.png",
+    "gallery": "expense-tracker.html",
+    "github": "https://github.com/jienie37/IT114-Expense-Tracker"
+  },
+  {
+    "title": "Serve+",
+    "subtitle": "Web Development",
+    "image": "assets/img/projects/serve+/image_2026-03-18_20-54-56.png",
+    "gallery": "serve-plus.html",
+    "github": "https://github.com/shwagg/serve_plus#"
+  }
+]

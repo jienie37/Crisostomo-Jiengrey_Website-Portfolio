@@ -193,6 +193,14 @@
     const tabs = document.querySelectorAll('[data-target]');
     const tabContents = document.querySelectorAll('[data-content]');
 
+    function revealVisibleTabContent(target) {
+        target.querySelectorAll('.skills__area, .certificates__card').forEach(el => {
+            el.style.visibility = 'visible';
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+    }
+
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             const target = document.querySelector(tab.dataset.target);
@@ -200,6 +208,7 @@
 
             tabContents.forEach(tc => tc.classList.remove('filters__active'));
             target.classList.add('filters__active');
+            revealVisibleTabContent(target);
 
             tabs.forEach(t => t.classList.remove('filter-tab-active'));
             tab.classList.add('filter-tab-active');
@@ -402,7 +411,6 @@
     sr.reveal('.section__title',       { delay: 200 });
     sr.reveal('.section__subtitle',    { delay: 300 });
     sr.reveal('.filters__content',     { delay: 350 });
-    sr.reveal('.skills__area',         { delay: 300 });
     sr.reveal('.contact__card',        { interval: 120, delay: 300 });
     sr.reveal('.contact__form',        { origin: 'right', delay: 400 });
 })();

@@ -640,7 +640,7 @@ button { cursor: pointer; }
    SKILLS
    ============================================= */
 .skills__content {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .skills__area {
@@ -707,6 +707,80 @@ button { cursor: pointer; }
     border-radius: 10px;
     width: 0;
     transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* =============================================
+   CERTIFICATES
+   ============================================= */
+.certificates__content {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 1.25rem;
+}
+
+.certificates__card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--container-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.certificates__card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--first-color-light);
+}
+
+.certificates__card > a {
+    display: block;
+    background-color: var(--text-color-lighten);
+}
+
+.certificates__img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: top center;
+}
+
+.certificates__data {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+    flex: 1;
+}
+
+.certificates__title {
+    font-size: var(--small-font-size);
+    line-height: 1.45;
+}
+
+.certificates__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: auto;
+    color: var(--first-color);
+    font-size: var(--smaller-font-size);
+    font-weight: 600;
+}
+
+.certificates__link:hover {
+    color: var(--first-color-alt);
+}
+
+.certificates__pdf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, var(--text-color-lighten), var(--body-color));
+    color: var(--first-color);
+    font-size: 3rem;
 }
 
 /* =============================================
